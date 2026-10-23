@@ -1,7 +1,7 @@
 import numpy as np 
-from math import log, e
+from math import e
 
-def learn(epochs, lr, digit_test):
+def learn(epochs: int, lr: float, digit_test: float):
     x = np.array([[1], [3], [4], [6], [5], [8]])
     y = np.array([[0], [0], [0], [1], [1], [1]])
     w = 0.0
@@ -18,13 +18,14 @@ def learn(epochs, lr, digit_test):
         w = w - lr * w_grad
         b = b - lr * b_grad
 
-    digit = np.array([[digit_test]], dtype=np.float32)
-    logit = w * x + b
+    digit = np.array([[digit_test]])
+    logit = w * digit + b
     probality = 1 / (1 + e ** (-logit))
     predict = (probality >= 0.5)
+    predict = 1 if predict == True else 0
 
     print(f'Probality: {probality}', '\n',
           f'Class: {predict}')
 
-learn(10000, 0.001, 4)
+learn(10000, 0.01, 4.0)
 
