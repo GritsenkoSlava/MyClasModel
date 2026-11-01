@@ -46,15 +46,14 @@ class Model:
 
         print(f'  Probability: {probability}  ')
 
-    '''def test(self, test_digit):
+    def test(self, test_digit):
         digit = array([[4]], dtype=float32)
         logit = self.w @ digit + self.b
         probability = 1 / (1 + e ** - logit)
         predict = (probability >= 0.5)
         predict = 1 if predict is True else 0
 
-        print(probability)
-        print(predict)'''
+        print(f'Probability:  {probability}')
+        print(f'Predict:      {predict}')
 
-model = Model()
-model.learn(2000, 0.001)
+

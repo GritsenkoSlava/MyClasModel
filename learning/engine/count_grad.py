@@ -1,6 +1,6 @@
-from numpy import *
+from numpy import mean
 
-class Grad:
+class Counting:
     def __init__(self):
         pass
 
