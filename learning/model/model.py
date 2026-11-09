@@ -19,19 +19,22 @@ class Model:
 
     def learn(self, epochs, learning_rate):
         for epoch in range(epochs+1):
-            logit = self.w @ self.x + self.b
+            logit = self.w * self.x + self.b
             probability = 1 / 1 + e ** -logit
 
             grad_w, grad_b = self.Optimizer.get_grad(self.x, logit, probability)
-            loss = self.BCE.BCE(logit, probability)
+            #loss = self.Loss.BCE(logit, probability)
             self.w, self.b = self.Optimizer.step(self.w, self.b, learning_rate, grad_w, grad_b)
 
-            if (epoch + 1) % 100 == 0:
-                print(f"||  Loss:  {loss:.8f}  ||")
+            #if (epoch + 1) % 100 == 0:
+            #    print(f"||  Loss:  {loss:.8f}  ||")
 
-    def predict(self) -> int:
-        logit = self.x * self.w + self.b
-        probability = 1 / (1 + e ** - logit)
+    def predict(self, testDigitX):
+        digit = array([[testDigitX]], dtype=float)
+        logit = self.w * digit + self.b
+        probability = 1 / (1 + e ** (-logit))
         predict = (probability >= 0.5)
+        predict = 1 if predict is True else 0
 
-        return 1 if predict == True else 0
+        print(f'||  Probability  {probability}  ||'
+              f'  Class (1/0)  {predict}  ||')
